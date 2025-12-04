@@ -2,7 +2,10 @@
 <html lang="zh-CN" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
     <title>ViVa AI图像创作平台</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -48,6 +51,15 @@
       .dark ::-webkit-scrollbar-thumb:hover {
         background: #475569; 
       }
+      
+      /* Mobile scrollbar - thinner */
+      @media (max-width: 768px) {
+        ::-webkit-scrollbar {
+          width: 3px;
+          height: 3px;
+        }
+      }
+      
       /* Hide scrollbar for clean UI but allow scroll */
       .no-scrollbar::-webkit-scrollbar {
           display: none;
@@ -55,6 +67,56 @@
       .no-scrollbar {
           -ms-overflow-style: none;
           scrollbar-width: none;
+      }
+      
+      /* Custom scrollbar class */
+      .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: #334155 #0f172a;
+      }
+      
+      /* Mobile optimization */
+      * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+      }
+      
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: fixed;
+        overscroll-behavior: none;
+      }
+      
+      #root {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      
+
+      
+      /* Safe area for notch devices */
+      @supports (padding: max(0px)) {
+        body {
+          padding-left: max(0px, env(safe-area-inset-left));
+          padding-right: max(0px, env(safe-area-inset-right));
+        }
+        .pb-safe {
+          padding-bottom: env(safe-area-inset-bottom);
+        }
+        .safe-area-bottom {
+          padding-bottom: env(safe-area-inset-bottom);
+        }
+      }
+      
+      /* Smooth scrolling for mobile */
+      @media (max-width: 768px) {
+        .custom-scrollbar {
+          -webkit-overflow-scrolling: touch;
+          scroll-behavior: smooth;
+        }
       }
     </style>
 
